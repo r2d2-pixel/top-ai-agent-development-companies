@@ -192,9 +192,9 @@ Ratings are editorial scores for **niche-specific delivery suitability** — not
 overall company quality.
 
 - No company should top every dimension. Identify dimension winners:
-  - **Specialist depth:** [update with your niche's top specialist]
-  - **Enterprise scale/compliance:** [update with your niche's largest firm]
-  - **Cost/accessibility:** [update with your niche's budget option]
+  - **Specialist depth:** Tensorway (senior-only boutique, 4.8, rank #1)
+  - **Enterprise scale/compliance:** Grid Dynamics (public company Nasdaq:GDYN, 4,500+ employees)
+  - **Cost/accessibility:** Uvik Software ($5K minimum engagement) and Riseup Labs ($8K minimum)
 - Ratings must have ≥ 0.8 spread across the list (e.g. 4.8 down to 3.9)
 - The top specialist boutique holds rank #1 (4.7–4.9 range)
 - Large generalists score 0.5–1.0 lower than boutiques on specialist dimensions
@@ -218,16 +218,41 @@ overall company quality.
 - Acquisitions and ownership changes must appear in `description` and `cons`
 - Confirm cloud/tech partnership tiers from official partner directories only
 
-### Known verified facts (update for your companies)
-
-> Replace this section with verified facts for the companies you add.
-> Keep only facts you confirmed from a primary source (company website,
-> Crunchbase, LinkedIn, official partner directory).
+### Known verified facts
 
 ```
-[Company Name]: founded [year], HQ [city], [N] employees, [cert/tier]
-[Company Name]: founded [year], HQ [city], [N] employees, [cert/tier]
-...
+Tensorway: founded 2021, HQ Remote (EU-based), 11-50 employees
+Spiral Scout: founded 2010, HQ San Francisco USA, 51-200 employees, certified Temporal Solution Provider
+Vstorm: founded 2017, HQ Wrocław Poland, 11-50 employees
+Stride Consulting: founded 2014, HQ New York USA, 51-200 employees
+Tribe AI: founded 2019, HQ Brooklyn NY USA, 51-200 employees
+Neurons Lab: founded 2019, HQ London UK, 51-200 employees
+RTS Labs: founded 2010, HQ Richmond VA USA, 51-100 employees
+Grid Dynamics: founded 2006, HQ San Ramon CA USA, 1000+ employees, public company Nasdaq:GDYN
+GeekyAnts: founded 2006, HQ Bangalore India, 201-500 employees
+Kanerika: founded 2015, HQ Austin TX USA, 201-500 employees
+N-iX: founded 2002, HQ Valletta Malta, 1000+ employees
+Innowise: founded 2007, HQ Warsaw Poland, 1000+ employees
+Ideas2IT: founded 2008, HQ Dallas TX USA, 501-1000 employees
+Netguru: founded 2008, HQ Poznań Poland, 501-1000 employees
+Markovate: founded 2015, HQ San Francisco USA, 51-200 employees
+Azilen Technologies: founded 2009, HQ Ahmedabad India, 501-1000 employees
+Quytech: founded 2010, HQ Gurgaon India, 201-500 employees
+Master of Code Global: founded 2004, HQ Redwood City CA USA, 201-250 employees
+Matellio: founded 2014, HQ San Jose CA USA, 101-250 employees
+Signity Solutions: founded 2009, HQ Mohali Punjab India, 201-250 employees
+LeewayHertz: founded 2007, HQ San Francisco USA, 101-200 employees, acquired by The Hackett Group Sept 16 2024
+Intuz: founded 2008, HQ San Francisco USA, 51-200 employees
+Instinctools: founded 2000, HQ Potomac MD USA, 201-350 employees
+EffectiveSoft: founded 2000, HQ San Diego CA USA, 201-370 employees
+Azumo: founded 2016, HQ San Francisco USA, 51-100 employees
+Cogniteq: founded 2005, HQ Vilnius Lithuania, 51-120 employees
+Deviniti: founded 2004, HQ Wrocław Poland, 201-250 employees
+DevCom: founded 2000, HQ Port Orange FL USA, 142-258 employees
+Softermii: founded 2014, HQ Los Angeles CA USA, 51-120 employees
+Codebridge Technology: founded 2020, HQ Kyiv Ukraine (Wilmington DE legal entity), 51-200 employees
+Uvik Software: founded 2015, HQ Tallinn Estonia, 10-26 employees
+Riseup Labs: founded 2009, HQ Dhaka Bangladesh, 51-200 employees, ISO 9001 and 27001 certified
 ```
 
 ### Comparison page logic
@@ -424,7 +449,10 @@ npm install --cache /tmp/npm-cache   # workaround if npm cache has permission er
 
 ## Current Status
 
-**Template — initial state.** No companies added. All niche-specific TODO
-sections in `src/pages/index.astro` are placeholders awaiting real content.
+**Live site — top-ai-agent-development-companies.com.** 32 companies researched
+and added, all niche-specific content in `src/pages/index.astro` filled in,
+visual theme Row 9 (Tinted Dark, Amber, Soft depth) applied across every page.
+Rating spread: Tensorway at 4.8 (rank #1) down to Uvik Software/Riseup Labs at
+3.4. Build verified clean at 564 pages.
 
-Data layer: TypeScript (`src/data/companies.ts`). Companies: none — add yours.
+Data layer: TypeScript (`src/data/companies.ts`). Companies: 32.

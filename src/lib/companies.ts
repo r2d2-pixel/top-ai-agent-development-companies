@@ -8,10 +8,15 @@ export function getCompanies() {
 
 // Update these keys/labels to match the service categories in your niche
 export const SERVICE_LABELS: Record<string, string> = {
-  'custom-build':   'Custom Build',
-  'consulting':     'Consulting',
-  'integration':    'Integration',
-  'staff-aug':      'Staff Aug',
-  'fixed-price':    'Fixed Price',
-  'dedicated-team': 'Dedicated Team',
+  'multi-agent-systems':      'Multi-Agent Systems',
+  'rag-knowledge-agents':     'RAG & Knowledge Agents',
+  'workflow-integration':     'Workflow Integration',
+  'coding-agents':            'Coding Agents',
+  'monitoring-agents':        'Monitoring Agents',
+  'data-analytics-agents':    'Data & Analytics Agents',
+  'llm-integration':          'LLM Integration',
+  'agent-orchestration':      'Agent Orchestration',
+  'enterprise-automation':    'Enterprise Automation',
+  'task-automation':          'Task Automation',
+  'customer-support-agents':  'Customer Support Agents',
 };

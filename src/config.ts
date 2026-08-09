@@ -4,27 +4,27 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const SITE = {
-  name:          'TODO: Site Name',
-  domain:        'TODO: yourdomain.com',
-  url:           'https://TODO.yourdomain.com',
-  tagline:       'TODO: Independent reviews of [Niche]',
-  description:   'TODO: Site meta description for search engines.',
+  name:          'Top AI Agent Development Companies',
+  domain:        'top-ai-agent-development-companies.com',
+  url:           'https://top-ai-agent-development-companies.com',
+  tagline:       'The top-ranked AI agent development companies, independently reviewed',
+  description:   'See the top-ranked AI agent development companies compared side by side. Independent reviews, pricing data, and rankings for teams building autonomous AI agents.',
   locale:        'en_US',
-  twitterHandle: '',        // e.g. '@yourhandle' — leave empty to omit OG tag
-  lastReviewed:  'TODO: Month Year',
+  twitterHandle: '',
+  lastReviewed:  'August 2026',
 };
 
 export const NICHE = {
-  label:          'TODO: Niche Label',    // e.g. "AI Agent Development" — used in headings and meta
-  providerLabel:  'company',              // singular: "company" or "agency" or "tool"
-  providersLabel: 'companies',            // plural
-  verticalSlug:   'TODO-niche-slug',      // used in URL slugs, e.g. "ai-agent-development"
+  label:          'AI Agent Development',
+  providerLabel:  'company',
+  providersLabel: 'companies',
+  verticalSlug:   'ai-agent-development',
 };
 
 export const BRANDING = {
-  primaryColor: '#1e40af',  // tailwind brand-600; update tailwind.config.mjs too
-  logoText:     'TODO: Site Name',
-  logoPath:     '/logos/site-logo.svg',   // place file in public/logos/
+  primaryColor: '#d97706',  // tailwind brand-600 (Amber); update tailwind.config.mjs too
+  logoText:     'Top AI Agent Development Companies',
+  logoPath:     '/logos/site-logo.svg',
 };
 
 // ─── MONETIZATION ──────────────────────────────────────────────────────────
@@ -40,4 +40,5 @@ export const MONETIZATION = {
 export const NAV = [
   { label: 'Home',        href: '/' },
   { label: 'Disclosure',  href: '/affiliate-disclosure/' },
+  { label: 'Contact',     href: '/contact/' },
 ];
