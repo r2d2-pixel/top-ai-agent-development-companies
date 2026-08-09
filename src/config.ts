@@ -11,7 +11,6 @@ export const SITE = {
   description:   'See the top-ranked AI agent development companies compared side by side. Independent reviews, pricing data, and rankings for teams building autonomous AI agents.',
   locale:        'en_US',
   twitterHandle: '',
-  lastReviewed:  'August 2026',
 };
 
 export const NICHE = {

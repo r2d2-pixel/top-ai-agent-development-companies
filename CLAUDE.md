@@ -403,21 +403,28 @@ the `allTech` array to match your niche's capabilities and tools.
     write it already capitalized — there's nothing to title-case
     programmatically in that path.
 
-18. **Never bake `${SITE.lastReviewed}` (or any month/year) into a
-    `description` prop.** `SITE.lastReviewed` is for visible on-page trust
-    signals only — the "Last reviewed: [Month Year]" footer on company,
-    comparison, and alternatives pages, and the "Updated [Month Year]" hero
-    badge on the homepage. Before 2026-07-12, the homepage, company,
-    alternatives, and comparison pages all appended "Updated [Month Year]."
-    to their `<meta name="description">`, so every one of the 10 live r2d2
-    sites had a search-result snippet that read as stale in any month other
-    than the one baked in — these sites are not updated monthly. Same rule
-    applies to `SITE.description` in `src/config.ts`: it's the default
-    `description` fallback in `Base.astro` and is echoed verbatim in
-    `llms.txt.ts`'s blockquote, so a date there goes stale in the same way.
-    Verify with:
+18. **Never show a hardcoded "Updated/Last reviewed [Month Year]" anywhere on
+    the site — not in `<meta name="description">`, and not as a visible
+    on-page element either.** This is an `output: 'static'` Astro build with
+    no per-request logic; whatever `SITE.lastReviewed` was set to at the last
+    deploy stays frozen indefinitely, and these sites are not rebuilt monthly.
+    A stale on-page "Updated [Month Year]" badge reads as suspicious/dead to
+    both humans and LLMs evaluating freshness within weeks of launch — worse
+    than not showing a date at all. An earlier version of this rule (through
+    2026-08-09) only warned against the meta-description case and still kept
+    the on-page hero badge and per-page "Last reviewed"/"Last updated"
+    footers; that was wrong and got walked back on 2026-08-09 across all 20
+    affected r2d2 sites — `SITE.lastReviewed` was removed from `config.ts`
+    entirely, along with every on-page usage (`Base.astro` footer, homepage
+    hero badge + prose, `companies/[slug].astro`, `comparisons/[slug].astro`,
+    `alternatives/[slug].astro`, `affiliate-disclosure.astro`). Do not add
+    `SITE.lastReviewed` or any "Updated/Last reviewed" UI element to a new
+    site, and strip it outright (don't try to compute it dynamically) if
+    found on an existing one — unless the user explicitly asks for scheduled
+    rebuilds to back a real dynamic date. Verify with:
+    `grep -rn "lastReviewed\|Last reviewed\|Last updated" src/` and
     `grep -rlE '<meta name="description" content="[^"]*(January|February|March|April|May|June|July|August|September|October|November|December) [0-9]{4}' dist/`
-    — must return zero paths.
+    — both must return zero results.
 
 19. **Every new site needs a visual theme pick, not just a brand color.** A
     color-only pass (just `tailwind.config.mjs` `brand.*`) leaves every site

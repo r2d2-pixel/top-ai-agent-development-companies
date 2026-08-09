@@ -38,7 +38,7 @@ const allEngagementModels = [...new Set(companies.flatMap(c => c.engagementModel
         Top {NICHE.label} {providersLabelTC} in {year}
       </h1>
       <p class="text-lg sm:text-xl text-zinc-300 max-w-2xl mx-auto mb-6">
-        Independent reviews of {companies.length} {NICHE.providersLabel} selected for verified delivery track records, technical expertise, and transparent pricing data. Updated {SITE.lastReviewed}.
+        Independent reviews of {companies.length} {NICHE.providersLabel} selected for verified delivery track records, technical expertise, and transparent pricing data.
       </p>
       <div class="flex flex-wrap gap-3 justify-center mb-6">
         <a href="#comparison-table" class="bg-brand-400 text-zinc-950 font-semibold px-6 py-3 rounded-lg hover:bg-brand-500 transition-colors">
@@ -47,7 +47,6 @@ const allEngagementModels = [...new Set(companies.flatMap(c => c.engagementModel
       </div>
       <div class="flex flex-wrap gap-3 justify-center text-xs text-zinc-400">
         <span class="bg-brand-800 border border-zinc-700 px-3 py-1 rounded-full">{companies.length} {NICHE.providersLabel} reviewed</span>
-        <span class="bg-brand-800 border border-zinc-700 px-3 py-1 rounded-full">Updated {SITE.lastReviewed}</span>
         <span class="bg-brand-800 border border-zinc-700 px-3 py-1 rounded-full">Independent editorial</span>
       </div>
     </div>
@@ -520,7 +519,7 @@ const allEngagementModels = [...new Set(companies.flatMap(c => c.engagementModel
       <div class="prose-custom max-w-none text-sm text-zinc-200 space-y-4">
         <p>All company data was sourced from each company's own website, LinkedIn profile, and third-party review platforms where available. No company paid to be included. The shortlist was built by searching for firms with verifiable {NICHE.label} delivery experience, named case studies or client references, and a disclosed technical stack that goes beyond generic claims.</p>
         <p>The editorial criteria applied were: specialisation maturity (is {NICHE.label} the firm's core business or a side practice added recently?), technical specificity (named tools and techniques rather than generic references), named case studies in production deployments, engagement model transparency, and minimum project size accessibility. Firms with no verifiable {NICHE.label} delivery track record were excluded regardless of size or brand recognition.</p>
-        <p>Ratings are editorial, not aggregated from a third-party review platform. They reflect suitability for the {NICHE.label} use case specifically, not overall service quality. Last reviewed: {SITE.lastReviewed}. Verify all details directly with each {NICHE.providerLabel} before making a procurement decision.</p>
+        <p>Ratings are editorial, not aggregated from a third-party review platform. They reflect suitability for the {NICHE.label} use case specifically, not overall service quality. Verify all details directly with each {NICHE.providerLabel} before making a procurement decision.</p>
       </div>
     </section>
 
