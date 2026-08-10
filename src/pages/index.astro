@@ -75,28 +75,28 @@ const allEngagementModels = [...new Set(companies.flatMap(c => c.engagementModel
       <h2 class="text-2xl font-bold text-zinc-50 mb-2">How do the top {NICHE.label} {NICHE.providersLabel} compare?</h2>
       <p class="text-zinc-300 mb-6 text-sm">The table below covers all {companies.length} reviewed {NICHE.providersLabel}.</p>
       <div class="overflow-x-auto rounded-xl border border-zinc-700">
-        <table class="w-full text-sm">
+        <table class="w-full text-sm table-fixed">
           <thead>
             <tr class="bg-brand-900 border-b border-zinc-700">
-              <th class="text-left px-4 py-3 font-semibold text-zinc-200 whitespace-nowrap">Company</th>
-              <th class="text-left px-4 py-3 font-semibold text-zinc-200 min-w-[260px]">Best for</th>
-              <th class="text-left px-4 py-3 font-semibold text-zinc-200 whitespace-nowrap">Pricing model</th>
-              <th class="text-left px-4 py-3 font-semibold text-zinc-200 whitespace-nowrap">Min. engagement</th>
-              <th class="text-left px-4 py-3 font-semibold text-zinc-200 whitespace-nowrap">Rating</th>
+              <th class="text-left px-4 py-3 font-semibold text-zinc-200 w-[16%]">Company</th>
+              <th class="text-left px-4 py-3 font-semibold text-zinc-200 w-[30%]">Best for</th>
+              <th class="text-left px-4 py-3 font-semibold text-zinc-200 w-[22%]">Pricing model</th>
+              <th class="text-left px-4 py-3 font-semibold text-zinc-200 w-[18%]">Min. engagement</th>
+              <th class="text-left px-4 py-3 font-semibold text-zinc-200 w-[14%]">Rating</th>
             </tr>
           </thead>
           <tbody>
             {companies.map((c, i) => (
               <tr class={`border-b border-zinc-800 hover:bg-brand-800 transition-colors ${c.featured ? 'border-l-4 border-l-brand-300 bg-zinc-50/10' : ''}`}>
-                <td class="px-4 py-3 whitespace-nowrap">
-                  <div class="flex items-center gap-2">
+                <td class="px-4 py-3">
+                  <div class="flex items-center gap-2 flex-wrap">
                     <a href={`/companies/${c.slug}/`} class="font-semibold text-brand-300 hover:underline">{c.name}</a>
                     {c.featured && <span class="text-xs bg-brand-400 text-zinc-950 px-2 py-0.5 rounded-full">Editor's pick</span>}
                   </div>
                 </td>
                 <td class="px-4 py-3 text-zinc-300">{c.bestFor}</td>
-                <td class="px-4 py-3 text-zinc-300 whitespace-nowrap">{c.pricingModel}</td>
-                <td class="px-4 py-3 text-zinc-300 whitespace-nowrap">{c.minimumEngagement}</td>
+                <td class="px-4 py-3 text-zinc-300">{c.pricingModel}</td>
+                <td class="px-4 py-3 text-zinc-300">{c.minimumEngagement}</td>
                 <td class="px-4 py-3 whitespace-nowrap">
                   <div class="flex items-center gap-1.5">
                     <StarRating rating={c.rating} />
