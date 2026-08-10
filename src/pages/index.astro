@@ -62,7 +62,7 @@ const allEngagementModels = [...new Set(companies.flatMap(c => c.engagementModel
       <ul class="space-y-2 text-sm text-zinc-200">
         {featuredProfiles.slice(0, 6).map(c => (
           <li>
-            <span class="font-semibold">Best for {c.bestFor.split(' ').slice(0, 4).join(' ').toLowerCase().replace(/,$/, '')}:</span>{' '}
+            <span class="font-semibold">Best for {(/^[A-Z][a-z0-9-]*$/.test(c.bestFor.split(' ')[0]) ? c.bestFor.charAt(0).toLowerCase() + c.bestFor.slice(1) : c.bestFor).replace(/\.$/, '')}:</span>{' '}
             <a href={`/companies/${c.slug}/`} class="text-brand-300 hover:underline">{c.name}</a>
             {' '}— {c.primaryDifferentiator}
           </li>
