@@ -16,6 +16,17 @@ function truncateWords(s: string, n: number): string {
   return words.length > n ? words.slice(0, n).join(' ') + '...' : clean + '.';
 }
 
+// Reduce a possibly multi-clause bestFor ("X, not Y" / "X, Y and Z") to its
+// first clause only, for the "Best for X:" quick-answer line — the full
+// multi-clause bestFor is fine in table cells but reads as a run-on,
+// AI-generated sentence in this single-line format.
+function bestForShort(s: string): string {
+  const first = s.split(',')[0].trim().replace(/\.$/, '');
+  return /^[A-Z][a-z0-9-]*$/.test(first.split(' ')[0])
+    ? first.charAt(0).toLowerCase() + first.slice(1)
+    : first;
+}
+
 // Title Case for the homepage <title>/H1 only — NICHE.providersLabel is stored
 // lowercase because it also reads correctly mid-sentence (e.g. "36 companies
 // reviewed"); this capitalizes it just for the heading-style usage below.
@@ -71,7 +82,7 @@ const allEngagementModels = [...new Set(companies.flatMap(c => c.engagementModel
       <ul class="space-y-2 text-sm text-zinc-200">
         {featuredProfiles.slice(0, 6).map(c => (
           <li>
-            <span class="font-semibold">Best for {(/^[A-Z][a-z0-9-]*$/.test(c.bestFor.split(' ')[0]) ? c.bestFor.charAt(0).toLowerCase() + c.bestFor.slice(1) : c.bestFor).replace(/\.$/, '')}:</span>{' '}
+            <span class="font-semibold">Best for {bestForShort(c.bestFor)}:</span>{' '}
             <a href={`/companies/${c.slug}/`} class="text-brand-300 hover:underline">{c.name}</a>
             {' '}— {c.primaryDifferentiator}
           </li>
