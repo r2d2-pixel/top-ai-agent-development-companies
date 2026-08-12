@@ -151,7 +151,7 @@ const decisionRows: [string, string][] = [
               ['HQ', c1.hq, c2.hq],
               ['Team size', c1.teamSize, c2.teamSize],
               ['Rating', `${c1.rating.toFixed(1)} / 5`, `${c2.rating.toFixed(1)} / 5`],
-              ['Best for', c1.bestFor, c2.bestFor],
+              ['Primary differentiator', stripTrailingPeriods(c1.primaryDifferentiator), stripTrailingPeriods(c2.primaryDifferentiator)],
               ['Pricing model', c1.pricingModel, c2.pricingModel],
               ['Min. engagement', c1.minimumEngagement, c2.minimumEngagement],
               ['Primary tech stack', c1.techStack.slice(0, 3).join(', '), c2.techStack.slice(0, 3).join(', ')],
@@ -351,12 +351,12 @@ const decisionRows: [string, string][] = [
       <div class="grid sm:grid-cols-2 gap-6">
         <div>
           <h2 class="text-xl font-bold text-zinc-50 mb-3">Who should choose {c1.name}?</h2>
-          <p class="text-sm text-zinc-200 mb-2">{c1.name} is the right choice for {lowerFirstSentence(c1.bestFor)}.</p>
+          <p class="text-sm text-zinc-200 mb-2">A typical fit: {lowerFirstSentence(c1.useCases[0] || c1.bestFor)}.</p>
           <p class="text-sm text-zinc-200">{stripTrailingPeriods(c1.primaryDifferentiator)}. Minimum engagement starts at {c1.minimumEngagement}. Works best with clients in {c1.industries.join(', ')}.</p>
         </div>
         <div>
           <h2 class="text-xl font-bold text-zinc-50 mb-3">Who should choose {c2.name}?</h2>
-          <p class="text-sm text-zinc-200 mb-2">{c2.name} is the right choice for {lowerFirstSentence(c2.bestFor)}.</p>
+          <p class="text-sm text-zinc-200 mb-2">A typical fit: {lowerFirstSentence(c2.useCases[0] || c2.bestFor)}.</p>
           <p class="text-sm text-zinc-200">{stripTrailingPeriods(c2.primaryDifferentiator)}. Minimum engagement starts at {c2.minimumEngagement}. Works best with clients in {c2.industries.join(', ')}.</p>
         </div>
       </div>
@@ -423,11 +423,11 @@ const decisionRows: [string, string][] = [
       <div class="bg-brand-900 border border-zinc-700 rounded-xl p-6 mb-4">
         <p class="text-zinc-200 mb-3">
           <strong>{winner.name}</strong> ({winner.rating.toFixed(1)}/5) is the stronger overall choice for most {NICHE.label} projects.
-          {stripTrailingPeriods(winner.primaryDifferentiator)}. It is best for {lowerFirstSentence(winner.bestFor)}.
+          {stripTrailingPeriods(winner.primaryDifferentiator)}.
         </p>
         <p class="text-zinc-200">
-          <strong>{runner.name}</strong> ({runner.rating.toFixed(1)}/5) is the better choice when {lowerFirstSentence(runner.bestFor)}.
-          If your situation matches those criteria, {runner.name} is a competitive option.
+          <strong>{runner.name}</strong> ({runner.rating.toFixed(1)}/5) is worth a look if you need {lowerFirstSentence(runner.useCases[1] || runner.useCases[0] || runner.bestFor)}.
+          If your situation matches that, {runner.name} is a competitive option.
         </p>
       </div>
       <div class="flex flex-wrap gap-3">
@@ -466,8 +466,8 @@ const decisionRows: [string, string][] = [
           <h3 class="font-semibold text-zinc-50 mb-2">Is {c1.name} better than {c2.name}?</h3>
           <p class="text-sm text-zinc-300">
             {winner.name} ({winner.rating.toFixed(1)}/5) scores higher overall, but "better" depends on your use case.
-            {c1.name} is better for {lowerFirstSentence(c1.bestFor)}.
-            {c2.name} is better for {lowerFirstSentence(c2.bestFor)}.
+            {c1.name}'s strongest advantage: {c1.pros[0] ? lowerFirstSentence(c1.pros[0]) : lowerFirstSentence(c1.primaryDifferentiator)}.
+            {c2.name}'s strongest advantage: {c2.pros[0] ? lowerFirstSentence(c2.pros[0]) : lowerFirstSentence(c2.primaryDifferentiator)}.
           </p>
         </div>
         <div class="border-b border-zinc-800 pb-5">
