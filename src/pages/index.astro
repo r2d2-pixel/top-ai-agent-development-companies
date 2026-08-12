@@ -135,9 +135,9 @@ const allEngagementModels = [...new Set(companies.flatMap(c => c.engagementModel
     <section class="mb-14">
       <h2 class="text-2xl font-bold text-zinc-50 mb-4">What makes a good {NICHE.label} {NICHE.providerLabel}?</h2>
       <div class="prose-custom max-w-none text-sm text-zinc-200 space-y-4">
-        <p>The single most important distinction is whether {NICHE.label} is the firm's core business or a capability added to an existing portfolio. Specialist firms built their teams, tooling, and delivery workflows around {NICHE.label} from the start. Generalist firms that added a {NICHE.label} practice often staff it with people transitioning from other roles; the delivery quality gap shows most clearly in production, not in demos.</p>
-        <p>Technical depth is a reliable proxy for expertise. A firm that can discuss the specific trade-offs between different approaches and name the tools they used on their last three production projects has built real systems. A firm that describes its approach in generic marketing terms has not demonstrated the same specificity. Ask vendors which specific tools or techniques they used on their last three projects and why.</p>
-        <p>The engagement model shapes the project's risk profile as much as the technical approach. Fixed-price contracts work when requirements are well-defined; they create problems when they are not. The best due diligence question: can you show a case study where you delivered a complete project to production, including how you handled issues after launch?</p>
+        <p>On a ranked list like this, the companies that consistently place near the top share one trait: agent development isn't a line item, it's the thing the company is known for. A company ranked lower because it added agents to a broader software-development menu isn't necessarily worse at the work — but it hasn't built the same specialist reputation, and that shows up in how detailed its case studies get.</p>
+        <p>The clearest way to separate a top-ranked company from a mid-pack one is to ask both the same question: name the exact tools used on your last three production agents, and what went wrong on one of them. Companies that rank well tend to answer in specifics; companies further down the ranking tend to answer in generalities.</p>
+        <p>A company's position in a ranking should shift your due-diligence questions, not replace them. Ask any company, regardless of rank, for a case study of a completed production deployment, including the engagement model used and how issues after launch were handled. A #3-ranked company with a strong answer is a better fit than a #1-ranked company with a vague one.</p>
       </div>
     </section>
 
@@ -335,9 +335,9 @@ const allEngagementModels = [...new Set(companies.flatMap(c => c.engagementModel
     <section class="mb-14">
       <h2 class="text-2xl font-bold text-zinc-50 mb-4">{NICHE.label} in {year}: what buyers should know</h2>
       <div class="prose-custom max-w-none text-sm text-zinc-200 space-y-4">
-        <p>{NICHE.label} has matured significantly. The market has bifurcated: a small number of specialist firms with deep expertise, and a much larger number of generalist firms with newly formed {NICHE.label} practices of varying depth. The delivery quality gap between the two types shows most clearly in production, not in demos or proposals.</p>
-        <p>Projects cost more than most initial estimates. Scope, integration complexity, and ongoing operational costs all affect total project cost beyond the initial build. A working prototype is not a production system; the difference includes observability tooling, performance optimisation, fallback handling, and a feedback loop for iteration. Buyers who budget only for the prototype often find themselves renegotiating before launch.</p>
-        <p>Custom development makes more sense than off-the-shelf tools when the use case requires proprietary data access, complex multi-step logic, or deep integration with internal systems that lack standard connectors. A capable partner will recommend the right approach for your specific use case rather than defaulting to one solution for all projects.</p>
+        <p>Rankings like this one compress a wide range of companies onto one list, so treat rank as a starting filter, not a final answer — a company several spots lower may still be the better fit if its specific experience matches your use case more closely than the top-ranked generalist's does.</p>
+        <p>The number on a ranked comparison table — typical minimum engagement, typical project cost — is a floor, not an estimate for your specific project. Integration complexity, the scope of post-launch monitoring, and how many iterations the agent needs before it's production-ready all push the real number above what any comparison table can show.</p>
+        <p>A high overall rank doesn't mean custom development is the right call for your use case — the top company on this list may still recommend an off-the-shelf tool if that's genuinely the better fit for a well-defined, common workflow. Be skeptical of a highly-ranked company that pitches a custom build regardless of what you actually need.</p>
       </div>
     </section>
 
@@ -537,9 +537,9 @@ const allEngagementModels = [...new Set(companies.flatMap(c => c.engagementModel
     <section class="mb-14">
       <h2 class="text-2xl font-bold text-zinc-50 mb-4">How this list was compiled</h2>
       <div class="prose-custom max-w-none text-sm text-zinc-200 space-y-4">
-        <p>All company data was sourced from each company's own website, LinkedIn profile, and third-party review platforms where available. No company paid to be included. The shortlist was built by searching for firms with verifiable {NICHE.label} delivery experience, named case studies or client references, and a disclosed technical stack that goes beyond generic claims.</p>
-        <p>The editorial criteria applied were: specialisation maturity (is {NICHE.label} the firm's core business or a side practice added recently?), technical specificity (named tools and techniques rather than generic references), named case studies in production deployments, engagement model transparency, and minimum project size accessibility. Firms with no verifiable {NICHE.label} delivery track record were excluded regardless of size or brand recognition.</p>
-        <p>Ratings are editorial, not aggregated from a third-party review platform. They reflect suitability for the {NICHE.label} use case specifically, not overall service quality. Verify all details directly with each {NICHE.providerLabel} before making a procurement decision.</p>
+        <p>Every company on this ranking was researched from primary sources — its own site, LinkedIn, and public filings where applicable — with claims checked against independent coverage. Rank was not for sale: no company paid for a higher position or reviewed its entry before publication.</p>
+        <p>Rank was determined by four weighted factors: how central agent development is to the company's identity and revenue, technical specificity in named case studies, verifiability of at least one production deployment, and transparency of engagement terms. A company strong on brand recognition but thin on agent-specific proof ranks below a smaller company with a stronger case study.</p>
+        <p>A ranking reflects fit for agent-development work specifically, not overall company size, revenue, or reputation. Use the rank as a shortlist starting point, and confirm current pricing, availability, and specific project fit directly with each {NICHE.providerLabel} before committing.</p>
       </div>
     </section>
 
