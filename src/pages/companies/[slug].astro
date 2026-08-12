@@ -152,8 +152,7 @@ const jsonLd = [
           <h2 class="text-xl font-bold text-zinc-50 mb-4">What is {company.name}?</h2>
           <p class="text-zinc-200 leading-relaxed mb-4">{company.description}</p>
           <p class="text-zinc-200 leading-relaxed">
-            {company.name} was founded in {company.founded} and is headquartered in {company.hq}.
-            The firm employs {company.teamSize} people and works primarily with clients in {company.industries.join(', ')} sectors.
+            {company.name} works primarily with clients in {company.industries.join(', ')} sectors.
             Its primary differentiator is: {stripTrailingPeriods(company.primaryDifferentiator)}.
           </p>
         </section>
