@@ -5,6 +5,7 @@ import JsonLd from '../../components/JsonLd.astro';
 import { companies, getComparisons } from '../../data/companies';
 import type { Company } from '../../data/companies';
 import { SITE, NICHE } from '../../config';
+import { SERVICE_LABELS } from '../../lib/companies';
 
 export function getStaticPaths() {
   return companies.map(c => ({ params: { slug: c.slug }, props: { company: c } }));
@@ -152,14 +153,12 @@ const jsonLd = [
               <thead>
                 <tr class="bg-brand-900 border-b border-zinc-700">
                   <th class="text-left px-4 py-3 font-semibold text-zinc-200">Service area</th>
-                  <th class="text-left px-4 py-3 font-semibold text-zinc-200">Details</th>
                 </tr>
               </thead>
               <tbody>
-                {company.useCases.map((uc, i) => (
+                {company.badges.map((b, i) => (
                   <tr class={`border-b border-zinc-800 ${i % 2 === 1 ? 'bg-brand-800/50' : ''}`}>
-                    <td class="px-4 py-3 font-medium text-zinc-100">{uc}</td>
-                    <td class="px-4 py-3 text-zinc-300">Available for {company.industries.join(', ')} clients</td>
+                    <td class="px-4 py-3 font-medium text-zinc-100">{SERVICE_LABELS[b] ?? b}</td>
                   </tr>
                 ))}
               </tbody>
@@ -176,16 +175,12 @@ const jsonLd = [
               <thead>
                 <tr class="bg-brand-900 border-b border-zinc-700">
                   <th class="text-left px-4 py-3 font-semibold text-zinc-200">Use case</th>
-                  <th class="text-left px-4 py-3 font-semibold text-zinc-200">Industries</th>
-                  <th class="text-left px-4 py-3 font-semibold text-zinc-200">Approach</th>
                 </tr>
               </thead>
               <tbody>
                 {company.useCases.map((uc, i) => (
                   <tr class={`border-b border-zinc-800 ${i % 2 === 1 ? 'bg-brand-800/50' : ''}`}>
-                    <td class="px-4 py-3 font-medium text-zinc-100">{uc}</td>
-                    <td class="px-4 py-3 text-zinc-300">{company.industries.slice(0, 2).join(', ')}</td>
-                    <td class="px-4 py-3 text-zinc-300">{company.techStack.slice(0, 2).join(', ')}</td>
+                    <td class="px-4 py-3 text-zinc-100">{uc}</td>
                   </tr>
                 ))}
               </tbody>
