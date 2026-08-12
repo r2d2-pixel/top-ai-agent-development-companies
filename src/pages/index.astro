@@ -7,6 +7,15 @@ import { SITE, NICHE } from '../config';
 const comparisons = getComparisons();
 const year = new Date().getFullYear();
 
+// Truncate to n words with an ellipsis, but only append "..." when truncation
+// actually happened — otherwise a short bestFor that already ends in "." would
+// render as "....". Untruncated strings get exactly one trailing period.
+function truncateWords(s: string, n: number): string {
+  const clean = s.replace(/\.+$/, '');
+  const words = clean.split(' ');
+  return words.length > n ? words.slice(0, n).join(' ') + '...' : clean + '.';
+}
+
 // Title Case for the homepage <title>/H1 only — NICHE.providersLabel is stored
 // lowercase because it also reads correctly mid-sentence (e.g. "36 companies
 // reviewed"); this capitalizes it just for the heading-style usage below.
@@ -417,7 +426,7 @@ const allEngagementModels = [...new Set(companies.flatMap(c => c.engagementModel
               <tr class={`border-b border-zinc-800 hover:bg-brand-800 ${i % 2 === 1 ? 'bg-brand-800/40' : ''}`}>
                 <td class="px-4 py-3 font-semibold"><a href={`/companies/${c.slug}/`} class="text-brand-300 hover:underline">{c.name}</a></td>
                 <td class="px-4 py-3 text-zinc-200 font-medium whitespace-nowrap">{c.minimumEngagement}</td>
-                <td class="px-4 py-3 text-zinc-300">{c.bestFor.split(' ').slice(0, 8).join(' ')}...</td>
+                <td class="px-4 py-3 text-zinc-300">{truncateWords(c.bestFor, 8)}</td>
               </tr>
             ))}
           </tbody>

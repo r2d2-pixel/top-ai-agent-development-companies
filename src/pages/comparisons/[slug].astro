@@ -18,6 +18,17 @@ const { slug1, slug2 } = Astro.props;
 const c1 = companies.find(c => c.slug === slug1)!;
 const c2 = companies.find(c => c.slug === slug2)!;
 
+// Free-text fields (bestFor, primaryDifferentiator, etc.) sometimes already end
+// in a period; strip it before splicing into a sentence that adds its own "."
+// so we never render "..". Also preserves acronym casing (SaaS, EU, CTOs) when
+// lowercasing the first word, matching the homepage's existing logic.
+const stripTrailingPeriods = (s: string) => s.replace(/\.+$/, '');
+function lowerFirstSentence(s: string): string {
+  const clean = stripTrailingPeriods(s);
+  const firstWord = clean.split(' ')[0];
+  return /^[A-Z][a-z0-9-]*$/.test(firstWord) ? clean.charAt(0).toLowerCase() + clean.slice(1) : clean;
+}
+
 const slug = `${slug1}-vs-${slug2}`;
 const canonical = `${SITE.url}/comparisons/${slug}/`;
 const fullTitle = `${c1.name} vs ${c2.name} (${new Date().getFullYear()}): ${NICHE.label} comparison`;
@@ -116,8 +127,8 @@ const decisionRows: [string, string][] = [
       <p class="text-sm text-zinc-200">
         <a href={`/companies/${winner.slug}/`} class="font-bold text-brand-300">{winner.name}</a> ({winner.rating.toFixed(1)}/5)
         edges ahead of <a href={`/companies/${runner.slug}/`} class="text-brand-300">{runner.name}</a> ({runner.rating.toFixed(1)}/5)
-        overall. {winner.name} is the better choice for {winner.bestFor.charAt(0).toLowerCase() + winner.bestFor.slice(1)}.
-        {runner.name} is the stronger option for {runner.bestFor.charAt(0).toLowerCase() + runner.bestFor.slice(1)}.
+        overall. {winner.name} is the better choice for {lowerFirstSentence(winner.bestFor)}.
+        {runner.name} is the stronger option for {lowerFirstSentence(runner.bestFor)}.
         The right choice depends on your project size, budget, and required tech stack.
       </p>
     </div>
@@ -340,13 +351,13 @@ const decisionRows: [string, string][] = [
       <div class="grid sm:grid-cols-2 gap-6">
         <div>
           <h2 class="text-xl font-bold text-zinc-50 mb-3">Who should choose {c1.name}?</h2>
-          <p class="text-sm text-zinc-200 mb-2">{c1.name} is the right choice for {c1.bestFor.charAt(0).toLowerCase() + c1.bestFor.slice(1)}.</p>
-          <p class="text-sm text-zinc-200">{c1.primaryDifferentiator}. Minimum engagement starts at {c1.minimumEngagement}. Works best with clients in {c1.industries.join(', ')}.</p>
+          <p class="text-sm text-zinc-200 mb-2">{c1.name} is the right choice for {lowerFirstSentence(c1.bestFor)}.</p>
+          <p class="text-sm text-zinc-200">{stripTrailingPeriods(c1.primaryDifferentiator)}. Minimum engagement starts at {c1.minimumEngagement}. Works best with clients in {c1.industries.join(', ')}.</p>
         </div>
         <div>
           <h2 class="text-xl font-bold text-zinc-50 mb-3">Who should choose {c2.name}?</h2>
-          <p class="text-sm text-zinc-200 mb-2">{c2.name} is the right choice for {c2.bestFor.charAt(0).toLowerCase() + c2.bestFor.slice(1)}.</p>
-          <p class="text-sm text-zinc-200">{c2.primaryDifferentiator}. Minimum engagement starts at {c2.minimumEngagement}. Works best with clients in {c2.industries.join(', ')}.</p>
+          <p class="text-sm text-zinc-200 mb-2">{c2.name} is the right choice for {lowerFirstSentence(c2.bestFor)}.</p>
+          <p class="text-sm text-zinc-200">{stripTrailingPeriods(c2.primaryDifferentiator)}. Minimum engagement starts at {c2.minimumEngagement}. Works best with clients in {c2.industries.join(', ')}.</p>
         </div>
       </div>
     </section>
@@ -412,10 +423,10 @@ const decisionRows: [string, string][] = [
       <div class="bg-brand-900 border border-zinc-700 rounded-xl p-6 mb-4">
         <p class="text-zinc-200 mb-3">
           <strong>{winner.name}</strong> ({winner.rating.toFixed(1)}/5) is the stronger overall choice for most {NICHE.label} projects.
-          {winner.primaryDifferentiator}. It is best for {winner.bestFor.charAt(0).toLowerCase() + winner.bestFor.slice(1)}.
+          {stripTrailingPeriods(winner.primaryDifferentiator)}. It is best for {lowerFirstSentence(winner.bestFor)}.
         </p>
         <p class="text-zinc-200">
-          <strong>{runner.name}</strong> ({runner.rating.toFixed(1)}/5) is the better choice when {runner.bestFor.charAt(0).toLowerCase() + runner.bestFor.slice(1)}.
+          <strong>{runner.name}</strong> ({runner.rating.toFixed(1)}/5) is the better choice when {lowerFirstSentence(runner.bestFor)}.
           If your situation matches those criteria, {runner.name} is a competitive option.
         </p>
       </div>
@@ -455,8 +466,8 @@ const decisionRows: [string, string][] = [
           <h3 class="font-semibold text-zinc-50 mb-2">Is {c1.name} better than {c2.name}?</h3>
           <p class="text-sm text-zinc-300">
             {winner.name} ({winner.rating.toFixed(1)}/5) scores higher overall, but "better" depends on your use case.
-            {c1.name} is better for {c1.bestFor.charAt(0).toLowerCase() + c1.bestFor.slice(1)}.
-            {c2.name} is better for {c2.bestFor.charAt(0).toLowerCase() + c2.bestFor.slice(1)}.
+            {c1.name} is better for {lowerFirstSentence(c1.bestFor)}.
+            {c2.name} is better for {lowerFirstSentence(c2.bestFor)}.
           </p>
         </div>
         <div class="border-b border-zinc-800 pb-5">
@@ -477,8 +488,8 @@ const decisionRows: [string, string][] = [
         <div class="pb-5">
           <h3 class="font-semibold text-zinc-50 mb-2">What are the main differences between {c1.name} and {c2.name}?</h3>
           <p class="text-sm text-zinc-300">
-            {c1.name}'s primary differentiator is: {c1.primaryDifferentiator.toLowerCase()}.
-            {c2.name}'s primary differentiator is: {c2.primaryDifferentiator.toLowerCase()}.
+            {c1.name}'s primary differentiator is: {lowerFirstSentence(c1.primaryDifferentiator)}.
+            {c2.name}'s primary differentiator is: {lowerFirstSentence(c2.primaryDifferentiator)}.
             They also differ in team size ({c1.teamSize} vs {c2.teamSize}), minimum engagement ({c1.minimumEngagement} vs {c2.minimumEngagement}), and primary industries served ({c1.industries.slice(0,2).join(', ')} vs {c2.industries.slice(0,2).join(', ')}).
           </p>
         </div>

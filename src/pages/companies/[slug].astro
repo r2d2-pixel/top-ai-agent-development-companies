@@ -14,6 +14,25 @@ export function getStaticPaths() {
 interface Props { company: Company }
 const { company } = Astro.props;
 
+// Free-text fields (bestFor, primaryDifferentiator, etc.) sometimes already end
+// in a period; strip it before splicing into a sentence that adds its own "."
+// so we never render "..". Also preserves acronym casing (SaaS, EU, CTOs) when
+// lowercasing the first word, matching the homepage's existing logic.
+const stripTrailingPeriods = (s: string) => s.replace(/\.+$/, '');
+function lowerFirstSentence(s: string): string {
+  const clean = stripTrailingPeriods(s);
+  const firstWord = clean.split(' ')[0];
+  return /^[A-Z][a-z0-9-]*$/.test(firstWord) ? clean.charAt(0).toLowerCase() + clean.slice(1) : clean;
+}
+// Truncate to n words with an ellipsis, but only append "..." when truncation
+// actually happened — otherwise a short bestFor that already ends in "." would
+// render as "....". Untruncated strings get exactly one trailing period.
+function truncateWords(s: string, n: number): string {
+  const clean = stripTrailingPeriods(s);
+  const words = clean.split(' ');
+  return words.length > n ? words.slice(0, n).join(' ') + '...' : clean + '.';
+}
+
 const others = companies.filter(c => c.slug !== company.slug);
 const allComparisons = getComparisons();
 const myComparisons = allComparisons.filter(
@@ -136,7 +155,7 @@ const jsonLd = [
           <p class="text-zinc-200 leading-relaxed">
             {company.name} was founded in {company.founded} and is headquartered in {company.hq}.
             The firm employs {company.teamSize} people and works primarily with clients in {company.industries.join(', ')} sectors.
-            Its primary differentiator is: {company.primaryDifferentiator}.
+            Its primary differentiator is: {stripTrailingPeriods(company.primaryDifferentiator)}.
           </p>
         </section>
 
@@ -169,7 +188,7 @@ const jsonLd = [
         <!-- Use cases -->
         <section id="use-cases" class="mb-10">
           <h2 class="text-xl font-bold text-zinc-50 mb-4">{company.name} use cases</h2>
-          <p class="text-zinc-300 mb-4 text-sm">Short answer: {company.name} is best suited for {company.bestFor.charAt(0).toLowerCase() + company.bestFor.slice(1)}.</p>
+          <p class="text-zinc-300 mb-4 text-sm">Short answer: {company.name} is best suited for {lowerFirstSentence(company.bestFor)}.</p>
           <div class="overflow-x-auto rounded-xl border border-zinc-700">
             <table class="w-full text-sm">
               <thead>
@@ -283,7 +302,7 @@ const jsonLd = [
                       <td class="px-4 py-3 font-medium">
                         <a href={`/companies/${alt.slug}/`} class="text-brand-300 hover:underline">{alt.name}</a>
                       </td>
-                      <td class="px-4 py-3 text-zinc-300 text-xs">{alt.bestFor.split(' ').slice(0, 8).join(' ')}...</td>
+                      <td class="px-4 py-3 text-zinc-300 text-xs">{truncateWords(alt.bestFor, 8)}</td>
                       <td class="px-4 py-3 text-zinc-300 text-xs">{alt.primaryDifferentiator}</td>
                       <td class="px-4 py-3 text-zinc-200 font-semibold">{alt.rating.toFixed(1)}</td>
                       <td class="px-4 py-3">
@@ -334,8 +353,8 @@ const jsonLd = [
             <div class="border-b border-zinc-800 pb-5">
               <h3 class="font-semibold text-zinc-50 mb-2">Is {company.name} right for enterprise?</h3>
               <p class="text-sm text-zinc-300">
-                {company.bestFor}. {company.teamSize} team size.
-                {company.cons[0] ? `Key consideration: ${company.cons[0]}.` : ''}
+                {stripTrailingPeriods(company.bestFor)}. {company.teamSize} team size.
+                {company.cons[0] ? `Key consideration: ${stripTrailingPeriods(company.cons[0])}.` : ''}
               </p>
             </div>
             <div class="pb-5">
