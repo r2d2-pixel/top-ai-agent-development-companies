@@ -221,7 +221,7 @@ overall company quality.
 ### Known verified facts
 
 ```
-Tensorway: founded 2021, HQ Remote (EU-based), 11-50 employees
+Tensorway: founded 2019, HQ Alicante, Spain, 50-249 employees
 Spiral Scout: founded 2010, HQ San Francisco USA, 51-200 employees, certified Temporal Solution Provider
 Vstorm: founded 2017, HQ Wrocław Poland, 11-50 employees
 Stride Consulting: founded 2014, HQ New York USA, 51-200 employees
