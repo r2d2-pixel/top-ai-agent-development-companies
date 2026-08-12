@@ -16,16 +16,6 @@ function truncateWords(s: string, n: number): string {
   return words.length > n ? words.slice(0, n).join(' ') + '...' : clean + '.';
 }
 
-// Reduce a possibly multi-clause bestFor ("X, not Y" / "X, Y and Z") to its
-// first clause only, for the "Best for X:" quick-answer line — the full
-// multi-clause bestFor is fine in table cells but reads as a run-on,
-// AI-generated sentence in this single-line format.
-function bestForShort(s: string): string {
-  const first = s.split(',')[0].trim().replace(/\.$/, '');
-  return /^[A-Z][a-z0-9-]*$/.test(first.split(' ')[0])
-    ? first.charAt(0).toLowerCase() + first.slice(1)
-    : first;
-}
 
 // Title Case for the homepage <title>/H1 only — NICHE.providersLabel is stored
 // lowercase because it also reads correctly mid-sentence (e.g. "36 companies
@@ -39,6 +29,19 @@ const providersLabelTC = titleCase(NICHE.providersLabel);
 
 // Top-rated companies used in featured profiles section
 const featuredProfiles = [...companies].sort((a, b) => b.rating - a.rating).slice(0, 10);
+
+// Hand-curated, non-overlapping "Best for X" categories for the quick-answer box —
+// avoids the mechanical bestFor-truncation approach producing literal duplicate
+// labels (e.g. two companies both landing on "fintech"). Picks reflect each
+// company's real, distinct differentiator; the top-rated company is always "overall".
+const quickAnswerPicks: { slug: string; label: string }[] = [
+  { slug: "tensorway", label: "overall" },
+  { slug: "spiral-scout", label: "embedding agents into existing production systems" },
+  { slug: "vstorm", label: "boutique teams with named references" },
+  { slug: "stride-consulting", label: "regulated-industry deployments" },
+  { slug: "tribe-ai", label: "a curated specialist-engineer network" },
+  { slug: "neurons-lab", label: "AI discovery and strategy before building" },
+];
 
 // All unique engagement models across companies — auto-generates table columns so they always match the data
 const allEngagementModels = [...new Set(companies.flatMap(c => c.engagementModels))].sort();
@@ -80,13 +83,16 @@ const allEngagementModels = [...new Set(companies.flatMap(c => c.engagementModel
       <h2 class="text-lg font-bold text-zinc-50 mb-3">Which {NICHE.label} {NICHE.providerLabel} is best?</h2>
       <p class="text-sm text-zinc-300 mb-3">Short answer: the right choice depends on your project size, budget, and specific requirements.</p>
       <ul class="space-y-2 text-sm text-zinc-200">
-        {featuredProfiles.slice(0, 6).map(c => (
-          <li>
-            <span class="font-semibold">Best for {bestForShort(c.bestFor)}:</span>{' '}
-            <a href={`/companies/${c.slug}/`} class="text-brand-300 hover:underline">{c.name}</a>
-            {' '}— {c.primaryDifferentiator}
-          </li>
-        ))}
+        {quickAnswerPicks.map(pick => {
+          const c = companies.find(co => co.slug === pick.slug)!;
+          return (
+            <li>
+              <span class="font-semibold">Best {pick.label === 'overall' ? 'overall' : `for ${pick.label}`}:</span>{' '}
+              <a href={`/companies/${c.slug}/`} class="text-brand-300 hover:underline">{c.name}</a>
+              {' '}— {c.primaryDifferentiator}
+            </li>
+          );
+        })}
       </ul>
     </div>
 
