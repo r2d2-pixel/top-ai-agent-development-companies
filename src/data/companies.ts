@@ -32,7 +32,7 @@ export const companies: Company[] = [
       "Tensorway, founded in 2019 as the dedicated AI-agent practice of a longer-running software development company, focuses specifically on AI agent systems — multi-agent pipelines and LLM-powered workflows for SaaS, fintech, healthtech, and e-commerce clients. The team stays senior-engineer-led from scoping through delivery, with fixed-project, retainer, and dedicated-team options depending on how a buyer wants to structure the relationship.",
     founded: 2019,
     hq: "Alicante, Spain",
-    teamSize: "50-249",
+    teamSize: "50+",
     rating: 4.8,
     badges: ["multi-agent-systems", "agent-orchestration", "llm-integration", "workflow-integration"],
     bestFor: "Senior-only agent specialists, no generalist overhead",
@@ -48,7 +48,7 @@ export const companies: Company[] = [
       "Deep, focused specialization in multi-agent orchestration and LLM-pipeline work",
     ],
     cons: [
-      "Team size (50–249, shared with the parent company's broader practice) is smaller than the largest generalist IT vendors on this list",
+      "Team size (50+, shared with the parent company's broader practice) is smaller than the largest generalist IT vendors on this list",
       "Published case studies are a shorter list than the large, longer-running IT generalists on this list",
     ],
     useCases: [
